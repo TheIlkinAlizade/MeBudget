@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>MeBudget</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,18 +67,12 @@
     <div class="logo">
       <img src="{% static 'MeBudget/mebudget-high-resolution-logo.png'%}" alt="Logo">
     </div>
-    <form>
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Enter your username">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password">
-      </div>
-      <div class="form-group">
-        <button type="submit">Login</button>
-      </div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
     </form>
   </div>
 </body>

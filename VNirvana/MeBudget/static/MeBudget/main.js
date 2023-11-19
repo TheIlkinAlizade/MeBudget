@@ -24,7 +24,7 @@ totalAmountButton.addEventListener("click", () => {
   } else {
     errorMessage.classList.add("hide");
     amount.innerHTML = tempAmount;
-    balanceValue.innerText = tempAmount - expenditureValue.innerText;
+    balanceValue.innerText = tempAmount;
     totalAmount.value = "";
   }
 });
@@ -33,14 +33,17 @@ totalAmountButton.addEventListener("click", () => {
 earningAmountButton.addEventListener("click", () => {
   let earning = parseInt(earningAmount.value);
   if (!isNaN(earning)) {
-    earningValue.innerText = earning;
-    balanceValue.innerText = parseInt(balanceValue.innerText) + earning;
+    let currentEarnings = parseInt(earningValue.innerText);
+    earningValue.innerText = currentEarnings + earning;
+    let currentBalance = parseInt(balanceValue.innerText);
+    balanceValue.innerText = currentBalance + earning;
     earningAmount.value = "";
     earningErrorMessage.classList.add("hide");
   } else {
     earningErrorMessage.classList.remove("hide");
   }
 });
+
 
 // Function To Disable Edit and Delete Button
 const disableButtons = (bool) => {
@@ -94,28 +97,27 @@ const listCreator = (expenseName, expenseValue) => {
 
 // Function To Add Expenses
 checkAmountButton.addEventListener("click", () => {
-    //empty checks
+  // Empty checks
   if (!userAmount.value || !productTitle.value) {
     productTitleError.classList.remove("hide");
     return false;
   }
-  //Enable buttons
+  // Enable buttons
   disableButtons(false);
-  //Expense
+  // Expense
   let expenditure = parseInt(userAmount.value);
-  //Total expense (existing + new)
-  let sum = parseInt(expenditureValue.innerText) + expenditure;
+  // Total expense (existing + new)
+  let currentExpenses = parseInt(expenditureValue.innerText);
+  let sum = currentExpenses + expenditure;
   expenditureValue.innerText = sum;
-  //Total balance(budget - total expense)
-  const totalBalance = tempAmount - sum;
+  // Total balance (budget + total earnings - total expense)
+  let currentEarnings = parseInt(earningValue.innerText);
+  const totalBalance = (parseInt(tempAmount) + parseInt(currentEarnings)) - parseInt(sum);
   balanceValue.innerText = totalBalance;
-  //Create list
+  // Create list
   listCreator(productTitle.value, userAmount.value);
- 
-  //Empty inputs
+
+  // Empty inputs
   productTitle.value = "";
   userAmount.value = "";
-}); 
-  
-
-
+});

@@ -1,9 +1,11 @@
 import random
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .models import MyModel, User
+from .forms import MyForm, UserForm
 
 import re
 
@@ -22,7 +24,40 @@ def index(request):
 
 
 def login(request):
-    return render(request, "Mebudget/login.html")
+    model = User.objects.all()
+    form = UserForm(request.POST)
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            username = request.POST.dict().get("username")
+            password = request.POST.dict().get("password")
+            if not User.objects.filter(username = username).exists():
+                form.save()
+                request.method = "GET"
+            else:
+                return redirect(login)
+            return redirect(index)
+        else:
+            form = UserForm()
+    return render(request, "Mebudget/login.html", {'form': form})
+
+
+def Get_names(request):
+  model = MyModel.objects.all()
+  form = MyForm(request.POST)
+  if request.method == "POST":
+    form = MyForm(request.POST)
+    if form.is_valid():
+      form.save()
+      request.method = "GET"
+      return redirect(Listofname)
+    else:
+      form = MyForm()
+  return render(request, 'hello/GetNames.html', {'form': form})
+
+def Listofname(request):
+   model = User.objects.all()
+   return render(request, 'MeBudget/index.html', {'Data' : model})
 '''
 
 def save_entry(title, content):
