@@ -1,107 +1,19 @@
 {% load static %}
-<html lang="en">
-  <html lang="en">
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Budget App</title>
-      <!-- Font Awesome Icons -->
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      />
-      <!-- Google Fonts -->
-      <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
-        rel="stylesheet"
-      />
-      <!-- Stylesheet -->
-      <link rel="stylesheet" href="{% static 'MeBudget/style.css' %}" />
-    </head>
-    <body>
-      <div class="logo">
-        <img src="{% static 'MeBudget/mebudget-high-resolution-logo.png'%}" alt="Logo">
-      </div>
-      <div class="wrapper">
-        <div class="container">
-          <div class="sub-container">
-            <!-- Budget -->
-            <div class="total-amount-container">
-              <h3>Budget</h3>
-              <p class="hide error" id="budget-error">
-                Value cannot be empty or negative
-              </p>
-              <input
-                type="number"
-                id="total-amount"
-                placeholder="Enter Total Amount"
-                />
-              <button class="submit" id="total-amount-button">Set Budget</button>
-            </div>
-            <!-- Earning-->
-            <div class="earning-amount-container">
-              <h3>Earnings</h3>
-              <p class="hide error" id="earning-error">
-                Value cannot be empty or negative
-              </p>
-              <input
-                type="number"
-                id="earning-amount"
-                placeholder="Enter Total Amount of Earnings"
-              />
-              <button class="submit" id="earning-amount-button">Set Earnings</button>
-            </div>
-  
-            
-            <!-- Expenditure -->
-            <div class="user-amount-container">
-              <h3>Expenses</h3>
-              <p class="hide error" id="product-title-error">
-                Values cannot be empty
-              </p>
-              <input
-              type="text"
-                class="product-title"
-                id="product-title"
-                placeholder="Enter Title of Product"
-                />
-                <input
-                type="number"
-                id="user-amount"
-                placeholder="Enter Cost of Product"
-                />
-                <button class="submit" id="check-amount">Check Amount</button>
-              </div>
-            </div>
-            <!-- Output -->
-            <div class="output-container flex-space">
-              <div>
-                <p>Total Budget</p>
-                <span id="amount">0</span>
-              </div>
-              <div>
-                <p>Expenses</p>
-                <span id="expenditure-value">0</span>
-              </div>
-              <div>
-                <p>Earnings</p>
-                <span id="earning-value">0</span>
-              </div>
-              <div>
-                <p>Balance</p>
-              <span id="balance-amount">0</span>
-            </div>
-          </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MeBudget</title>
+  <link rel="stylesheet" href="{% static 'MeBudget/defaultpage.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'MeBudget/mebudget-high-resolution-logo.png'%}" alt="Logo">
         </div>
-        <!-- List -->
-        <div class="list">
-          <h3>Expense List</h3>
-          <div class="list-container" id="list"></div>
-        </div>
-      </div>
-      <div class="motivation-container">
-        <h2 style="text-align: center; margin: 20px" >{{text}}</h2>
-      </div>
-      <!-- Script -->
-      <script src="{% static 'MeBudget/main.js' %}"></script>
-    </body>
-    </html>
+        <h2>{{ error_msg }}</h2>
+        <h1>Welcome to MeBudget</h1>
+        <p>Already a member? <a href="{% url 'login' %}">Sign-in</a></p>
+        <p>Not a member? <a href="{% url 'register' %}">Sign-Up</a></p>
+    </div>
+</body>
+</html>
