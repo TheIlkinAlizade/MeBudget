@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{% static 'MeBudget/signinup.css' %}" />
 </head>
 <body>
-  <h1>Login</h1>
+  <h1>Register</h1>
   <div class="container">
     <div class="logo">
       <img src="{% static 'MeBudget/mebudget-high-resolution-logo.png'%}" alt="Logo">
@@ -15,11 +15,11 @@
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Sign-in</button>
+          <button type="submit" class="btn btn-primary">Sign-Up</button>
         </div>
     </form>
     <h2>{{ error_msg }}</h2>
-    <p>Not a member? <a href="{% url 'register' %}">Sign-Up</a></p>
+    <p>Already a member? <a href="{% url 'login' %}">Sign-In</a></p>
   </div>
 </body>
 </html>
